@@ -6,11 +6,21 @@ function type_check_v1(arg1, arg2){
         return true;
     } else {
         return false;
-    }
+   }
 }
 
-function type_check_v2(val, condition){
-    
+const type_check_v2 = (check, type) => {
+    switch (true) {
+        case type.hasOwnProperty('type') && !type.hasOwnProperty('value') && !type.hasOwnProperty('enum'):
+            return type_check_v1(check, type.type);
+        case type.hasOwnProperty('type') && type.hasOwnProperty('value') && !type.hasOwnProperty('enum'):
+            return type_check_v1(check, type.type) && JSON.stringify(check) === JSON.stringify(type.value);
+        case !type.hasOwnProperty('type') && !type.hasOwnProperty('value') && type.hasOwnProperty('enum'):
+            return check === type.enum.length;
+        default:
+            return false;
+    }
+
 }
 
   console.log(type_check_v1());
