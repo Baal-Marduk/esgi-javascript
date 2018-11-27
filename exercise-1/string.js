@@ -48,7 +48,22 @@ function leet(string){
  }
  return data;
 }
+function prop_access(input, path){
+  var pathArray = path.split(".");
+  for(var i = 0; i<pathArray.length();i++){
+    if(input[pathArray[i]] ===undefined){
+      console.error('path exist');
+      return null;
+    }
+    input = input[pathArray[i]];
+  }
+  return input;
+}
 
+
+function type_check_v1(object){
+  return typeof(object[1]) === typeof(object[2]);
+}
 
 
 
